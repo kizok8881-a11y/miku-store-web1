@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>⚡ Miku - Store - id</title>
+
+    <meta property="og:title" content="Miku Store - menjual berbagai aplikasi premium" />
+    <meta property="og:description" content="menjual aplikasi prem Alight Motion, Capcut, Netflix, dan Wink. Cepat, amanah, dan berpengalaman." />
+    <meta property="og:image" content="https://drive.google.com/file/d/1wrIBjWjQtEpnQiTqUkqjKtNxWw_ntpwS/view?usp=drivesdk" />
+    <meta property="og:site_name" content="Miku Store" />
+    <meta property="og:url" content="https://namasitusmu.netlify.app/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Sora:wght@400;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome 6 (gratis) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- CSS terpisah -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ===== PARTIKEL BACKGROUND ===== -->
+    <canvas id="partikelCanvas"></canvas>
+
+    <!-- ===== BLOBS ===== -->
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav>
+        <div class="logo">
+            <i class="fas fa-bolt"></i> MikuStoreId
+        </div>
+        <div class="nav-actions">
+            <button class="chat-toggle" id="chatToggle" title="Tanya AI">
+                <i class="fas fa-robot"></i> <span>AI</span>
+            </button>
+            <button class="cart-btn" id="cartToggle">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Keranjang</span>
+                <span class="badge" id="cartCount">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== SLIDER PRODUK (atas) ===== -->
+    <section class="slider-section">
+        <div class="slider-wrapper">
+            <div class="slider" id="sliderUtama">
+                <div class="slider-track" id="sliderTrack"></div>
+            </div>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <h1>
+            <span class="highlight">Ayo Beli APK prem</span><br />
+            <span class="sub">Di MikuStore <span class="lightning">⚡</span> </span>
+        </h1>
+        <p>Dibuat dan dijual oleh store beramanah .</p>
+        <div class="cta-group">
+            <a href="#produk" class="btn-primary"><i class="fas fa-store"></i> Lihat Produk</a>
+            <button class="btn-secondary" id="chatToggle2"><i class="fas fa-comment-dots"></i> Tanya AI</button>
+        </div>
+    </section>
+
+    <!-- ===== PRODUK ===== -->
+    <section class="section" id="produk">
+        <div class="section-head">
+            <h2><i class="fas fa-cubes"></i> Semua Produk</h2>
+            <p>Klik tombol <strong>Pesan Langsung</strong> untuk order via WhatsApp</p>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <!-- ===== CTA FINAL ===== -->
+    <section class="cta-final">
+        <h2>Belum nemu yang cocok?</h2>
+        <p>Chat aja langsung, bisa tanya tanya langsung buat aplikasi prem nya.</p>
+        <a class="wa-main-btn" id="mainWaBtn" href="#">
+            <span class="hop"><i class="fas fa-comment-dots"></i></span> Chat Admin
+        </a>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>&copy; 2026 MikuStore - Selamat membeli.</p>
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- KERANJANG SIDEBAR -->
+    <!-- ============================================================ -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2><i class="fas fa-shopping-bag"></i> Keranjang</h2>
+            <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Keranjang masih kosong</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="promo-area">
+                <input type="text" id="promoInput" placeholder="Kode promo (contoh: PROMO10)" />
+                <button id="applyPromo">Pakai</button>
+            </div>
+            <div class="promo-status" id="promoStatus">
+                <small>⚠️ Promo hanya berlaku jika minimal 2 produk</small>
+            </div>
+            <div class="discount-row hidden" id="discountRow">
+                <span>Diskon</span>
+                <span id="discountAmount">-Rp0</span>
+            </div>
+            <div class="total-row">
+                <span>Total</span>
+                <span class="total-price" id="totalPrice">Rp0</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">
+                <i class="fas fa-credit-card"></i> Checkout Sekarang
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- AI CHAT MODAL -->
+    <!-- ============================================================ -->
+    <div class="chat-modal" id="chatModal">
+        <div class="chat-header">
+            <h3><i class="fas fa-robot" style="color:var(--cyan);"></i> AI Assistant</h3>
+            <button class="close-chat" id="closeChat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg bot">Halo! 👋 Saya AI toko. Tanya soal produk, harga, atau promo ya!</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Ketik pesan..." />
+            <button id="sendChat"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- ===== JS terpisah ===== -->
+    <script src="script.js"></script>
+</body>
+</html>
