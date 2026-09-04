@@ -31,13 +31,13 @@ sliderItems.forEach((item, i) => {
     const slide = document.createElement('div');
     slide.className = 'slide';
     slide.innerHTML = `
-        <div class="slide-imgbox">
-            <img src="${item.img}" alt="${item.name}" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <div class="slide-caption">
-            <h3>${item.name}</h3>
-            <p>${item.price}</p>
-        </div>
+    <div class="slide-imgbox">
+        <img src="${item.img}" alt="${item.name}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div class="slide-caption">
+        <h3>${item.name}</h3>
+        <p>${item.price}</p>
+    </div>
     `;
     track.appendChild(slide);
 
@@ -73,19 +73,19 @@ products.forEach(p => {
     const card = document.createElement('div');
     card.className = 'product-card';
     card.innerHTML = `
-        <div class="product-card-inner">
-            <div class="thumb">
-                <img src="${p.img}" alt="${p.name}" style="width:100%; height:100%; object-fit:cover;">
-            </div>
-            <h3>${p.name}</h3>
-            <p class="desc">${p.desc}</p>
-            <div class="price">Rp${p.price.toLocaleString()}</div>
-            <div class="btn-group">
-                <button class="add-btn" data-id="${p.id}"><i class="fas fa-plus-circle"></i> Tambah</button>
-                <a href="${waLink}" target="_blank" rel="noopener" class="wa-btn"><i class="fab fa-whatsapp"></i> Pesan Langsung</a>
-            </div>
+    <div class="product-card-inner">
+        <div class="thumb">
+            <img src="${p.img}" alt="${p.name}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
         </div>
-    `;
+        <h3>${p.name}</h3>
+        <p class="desc">${p.desc}</p>
+        <div class="price">Rp${p.price.toLocaleString()}</div>
+        <div class="btn-group">
+            <button class="add-btn" data-id="${p.id}"><i class="fas fa-plus-circle"></i> Tambah</button>
+            <a href="${waLink}" target="_blank" rel="noopener" class="wa-btn"><i class="fab fa-whatsapp"></i> Pesan Langsung</a>
+        </div>
+    </div>
+`;
     grid.appendChild(card);
 });
 
@@ -368,74 +368,32 @@ document.getElementById('mainWaBtn').href =
     `https://wa.me/${WA_NUMBER}?text=Halo%2C%20mau%20tanya-tanya%20soal%20aplikasi%2Fpremium+MikuStore`;
 
 // ============================================================
-// PARTIKEL CANVAS
+// PARTIKEL CANVAS (DINONAKTIFKAN)
 // ============================================================
-const canvas = document.getElementById('partikelCanvas');
-const ctx = canvas.getContext('2d');
-let w, h;
-const particles = [];
-const COUNT = 100;
+// Biarkan kosong — canvas tidak digambar
+// Jika ingin partikel, nyalakan dengan mengubah ini:
+const PARTIKEL_HIDUP = false;
 
-function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
+if (PARTIKEL_HIDUP) {
+    const canvas = document.getElementById('partikelCanvas');
+    const ctx = canvas.getContext('2d');
+    // ... kode partikel (tapi kamu bisa skip)
 }
-window.addEventListener('resize', resize);
-resize();
-
-class Particle {
-    constructor() { this.reset(); }
-    reset() {
-        this.x = Math.random() * w;
-        this.y = Math.random() * h;
-        this.size = Math.random() * 3 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 0.6;
-        this.speedY = (Math.random() - 0.5) * 0.6;
-        const hue = 200 + Math.random() * 60;
-        this.color = `hsl(${hue}, 80%, 70%)`;
-        this.opacity = Math.random() * 0.5 + 0.15;
-    }
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
-    }
-    draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = this.opacity;
-        ctx.fill();
-        ctx.globalAlpha = 1;
-    }
-}
-
-for (let i = 0; i < COUNT; i++) particles.push(new Particle());
-
-function animateParticles() {
-    ctx.clearRect(0, 0, w, h);
-    particles.forEach(p => { p.update(); p.draw(); });
-    for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 130) {
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.strokeStyle = `rgba(74, 154, 212, ${0.06 * (1 - dist / 130)})`;
-                ctx.lineWidth = 0.6;
-                ctx.stroke();
-            }
-        }
-    }
-    requestAnimationFrame(animateParticles);
-}
-animateParticles();
+console.log('⚡ Partikel dimatikan untuk performa.');
 
 // ============================================================
 // INIT
 // ============================================================
 updateCartUI();
+
+// ============================================================
+// HILANGKAN LOADING SCREEN
+// ============================================================
+function hideLoading() {
+    const screen = document.getElementById('loadingScreen');
+    if (screen) screen.classList.add('hidden');
+}
+window.addEventListener('load', hideLoading);
+setTimeout(hideLoading, 3000); // fallback
+
 console.log('⚡ MikuStore siap!');
