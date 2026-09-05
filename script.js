@@ -3,7 +3,7 @@
 // ============================================================
 const products = [
     { id: 1, name: 'Alight Motion Pivat', price: 20000, desc: 'Alight motion premium privat 1 tahun, google.', img: 'am.jpg' },
-    { id: 3, name: 'Capcut Pro', price: 15000, desc: 'capcut pro 7 hari 15k, 1 bulan 40k.', img: 'cc.jpg' },
+    { id: 3, name: 'Capcut Pro', price: 10000, desc: 'capcut pro 7 hari 10k, 1 bulan 30k.', img: 'cc.jpg' },
     { id: 4, name: 'Netflix premiun', price: 32000, desc: 'netflix premium 1 bulan.', img: 'netflix.jpg' },
     { id: 5, name: 'Wink premium', price: 10000, desc: 'wink premium 7 hari 10k, 30k 1 bulan, tutorial wink 20k.', img: 'wink.jpg' }
 ];
@@ -15,7 +15,7 @@ const sliderItems = [
     { img: 'poster wink.JPG', name: 'Wink Premium', price: 'nikmati membuat hd photo dan video' },
     { img: 'posterAM_prazs.png', name: 'Alight Motion', price: 'Best seller kami' },
     { img: 'poster netflix.PNG', name: 'Netflix Premium', price: 'ayo nonton sepuasnya' },
-    { img: 'capcut pro.PNG', name: 'Capcut Pro', price: 'ayo ngedit dengan bebas' } // opsional
+    { img: 'capcut pro.jpg', name: 'Capcut Pro', price: 'ayo ngedit dengan bebas' } // opsional
 ];
 
 // WA number
